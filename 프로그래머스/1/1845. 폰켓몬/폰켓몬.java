@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        int answer = 0;
         HashSet<Integer> hashSet = new HashSet<>();
         for(int num : nums){
             hashSet.add(num);
