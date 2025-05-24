@@ -3,22 +3,22 @@ import java.util.*;
 class Solution {
     boolean solution(String s) {
         
-        ArrayDeque<Character> stack = new ArrayDeque<>();
+        ArrayDeque<Character> deque = new ArrayDeque<>();
         
         char[] a = s.toCharArray();
         
         for(char c : a){
             if(c == '('){
-                stack.push(c);
+                deque.offerFirst(c);
             }
             else{
-                 if(stack.isEmpty()) {
+                 if(deque.isEmpty()) {
                     return false;
                 }
-                stack.pop();
+                deque.pollFirst();
             }
         }
 
-        return stack.isEmpty();
+        return deque.isEmpty();
     }
 }
