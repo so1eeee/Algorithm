@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Map.*;
 
 class Solution {
     public int solution(String[][] clothes) {
@@ -17,8 +18,8 @@ class Solution {
             hashMap2.put(value, hashMap2.getOrDefault(value, 0) + 1);
         }
         
-        for (Integer value : hashMap2.values()) {
-            result *= (value + 1); 
+        for (Entry<String, Integer> entry : hashMap2.entrySet()) {
+            result *= (entry.getValue() + 1); 
         }
         
         return result - 1;
