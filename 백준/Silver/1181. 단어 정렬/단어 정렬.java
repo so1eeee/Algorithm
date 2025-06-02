@@ -6,7 +6,6 @@ public class Main
     {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        sc.nextLine();
         Set<String> wordSet = new HashSet<>();
         for(int i = 0; i < n; i++){
             String word = sc.next();
@@ -16,10 +15,10 @@ public class Main
         List<String> wordList = new ArrayList<>(wordSet);
 
         Collections.sort(wordList, (a, b) -> {
-            if (a.length() == b.length()) {
-                return a.compareTo(b);
+            if (a.length() != b.length()) {
+                return a.length() - b.length();
             } else {
-                return Integer.compare(a.length(), b.length());
+                return a.compareTo(b);
             }
         });
 
