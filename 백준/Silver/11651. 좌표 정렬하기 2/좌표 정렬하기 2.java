@@ -25,9 +25,9 @@ public class Main {
         }
         Collections.sort(pointList, (a, b) -> {
             if (a.y != b.y) {
-                return Integer.compare(a.y, b.y);
+                return a.y - b.y;
             } else {
-                return Integer.compare(a.x, b.x);
+                return a.x - b.x;
             }
         });
 
@@ -36,3 +36,4 @@ public class Main {
         }
     }
 }
+
