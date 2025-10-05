@@ -1,52 +1,39 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
-
-    static ArrayList<Integer>[] adjList;
+    static ArrayList<ArrayList<Integer>> adj;
     static boolean[] visited;
+	static int N, M;
+	static int cnt;
 
-    static int bfs(int start) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(start);
-        visited[start] = true;
-        int cnt = 0;
-
-        while (!queue.isEmpty()) {
-            int cur = queue.poll();
-            for (int i : adjList[cur]) {
-                if(!visited[i]) {
-                    cnt++;
-                    visited[i] = true;
-                    queue.add(i);
-                }
-            }
-        }
-        return cnt;
+    static int dfs(int v) {
+        visited[v] = true;
+		for(int neighbor: adj.get(v)) {
+			if(!visited[neighbor]){
+				cnt++;
+				dfs(neighbor);
+			}
+		}
+		return cnt;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int start = 1;
-
-        adjList = new ArrayList[n + 1];
-        for (int i = 0; i < adjList.length; i++) {
-            adjList[i] = new ArrayList<>();
+        N = sc.nextInt();
+        M = sc.nextInt();
+        adj = new ArrayList<>();
+		visited = new boolean[N + 1];
+        for (int i = 0; i <= N; i++) {
+            adj.add(new ArrayList<>());
         }
-
-        for (int i = 0; i < m; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
-            adjList[s].add(e);
-            adjList[e].add(s);
+        for (int i = 0; i < M; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            adj.get(u).add(v);
+            adj.get(v).add(u);
         }
-
-        visited = new boolean[n + 1];
-        int res = bfs(start);
-        System.out.println(res);
+		cnt = 0;
+		System.out.println(dfs(1));
     }
 }
