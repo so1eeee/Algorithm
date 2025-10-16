@@ -1,0 +1,68 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Main {
+	static int N, M;
+	static int[][] map;
+	static int[] dx = {0, 0, 1, -1, -1, -1, 1, 1};
+	static int[] dy = {1, -1, 0, 0, 1, -1, 1, -1};
+
+	static class Point {
+		int x;
+		int y;
+		int cnt;
+
+		Point(int x, int y, int cnt) {
+			this.x = x;
+			this.y = y;
+			this.cnt = cnt;
+		}
+	}
+
+	static int bfs(int x, int y) {
+		Queue<Point> queue = new ArrayDeque<>();
+		boolean[][] visited = new boolean[N][M];
+		visited[x][y] = true;
+		queue.add(new Point(x, y, 0));
+		while (!queue.isEmpty()) {
+			Point p = queue.poll();
+			if (map[p.x][p.y] == 1) {
+				return p.cnt;
+			}
+			for (int i = 0; i < 8; i++) {
+				int nx = p.x + dx[i];
+				int ny = p.y + dy[i];
+				if (nx >= 0 && ny >= 0 && nx < N && ny < M && !visited[nx][ny]) {
+					visited[nx][ny] = true;
+					queue.add(new Point(nx, ny, p.cnt + 1));
+				}
+			}
+		}
+		return -1;
+	}
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		map = new int[N][M];
+		for (int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
+			for (int j = 0; j < M; j++) {
+				map[i][j] = Integer.parseInt(st.nextToken());
+			}
+		}
+		int max = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				max = Math.max(max, bfs(i, j));
+			}
+		}
+		System.out.println(max);
+	}
+}
