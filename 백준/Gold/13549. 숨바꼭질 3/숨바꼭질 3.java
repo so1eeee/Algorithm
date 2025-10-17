@@ -10,31 +10,39 @@ public class Main {
 	static int N, K;
 	static int[] time;
 
-	static int bfs(int start, int end) {
-		if (start == end) {
+	static int bfs() {
+		if (N == K) {
 			return 0;
 		}
-		Deque<Integer> queue = new ArrayDeque<>();
-		queue.add(start);
-		time[start] = 0;
-		while (!queue.isEmpty()) {
-			int cur = queue.poll();
-			if(cur == end){
+		Deque<Integer> deque = new ArrayDeque<>();
+		deque.add(N);
+		time[N] = 0;
+		while (!deque.isEmpty()) {
+			int cur = deque.poll();
+			if(cur == K){
 				return time[cur];
 			}
-			int nextPos = cur * 2;
-			if (nextPos >= 0 && nextPos < 100001 && time[nextPos] == -1) {
-				time[nextPos] = time[cur];
-				queue.addFirst(nextPos);
-			}
-			int[] next = {cur - 1, cur + 1};
-			for (int n : next) {
-				if (n >= 0 && n < 100001 && time[n] == -1) {
-					time[n] = time[cur] + 1;
-					queue.addLast(n);
+			int n1 = cur * 2;
+			if (n1 >= 0 && n1 < 100001) {
+				if(time[n1] > time[cur]){
+					time[n1] = time[cur];
+					deque.addFirst(n1);
 				}
 			}
-
+			int n2 = cur - 1;
+			if (n2 >= 0 && n2 < 100001) {
+				if(time[n2] > time[cur] + 1){
+					time[n2] = time[cur] + 1;
+					deque.addLast(n2);
+				}
+			}
+			int n3 = cur + 1;
+			if (n3 >= 0 && n3 < 100001) {
+				if(time[n3] > time[cur] + 1){
+					time[n3] = time[cur] + 1;
+					deque.addLast(n3);
+				}
+			}
 		}
 		return -1;
 	}
@@ -45,7 +53,7 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
 		time = new int[100001];
-		Arrays.fill(time, -1);
-		System.out.println(bfs(N, K));
+		Arrays.fill(time, Integer.MAX_VALUE);
+		System.out.println(bfs());
 	}
 }
