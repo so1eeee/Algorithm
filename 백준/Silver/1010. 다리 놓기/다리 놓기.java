@@ -5,14 +5,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int combination(int M, int N){
-		int[][] dp = new int[M + 1][N + 1];
-		for (int i = 1; i <= M; i++) {
-			dp[i][0] = 1;
+	static int combination(int M, int N){
+		if(M == N){
+			return 1;
 		}
-		for (int i = 1; i <= M; i++) {
-			for (int j = 1; j <= N; j++) {
-				if(i == j){
+		int[][] dp = new int[M + 1][N + 1];
+		for (int i = 0; i <= M; i++) {
+			for (int j = 0; j <= Math.min(i, N); j++) {
+				if(j == 0 || j == i){
 					dp[i][j] = 1;
 				} else {
 					dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
