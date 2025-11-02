@@ -9,24 +9,24 @@ public class Main {
 		int N = Integer.parseInt(br.readLine());
 		ArrayDeque<Integer> deque = new ArrayDeque<>();
 		for (int i = 1; i <= N; i++) {
-			deque.addLast(i);
+			deque.offer(i);
 		}
 		while(true) {
 			if(deque.size() == 1) {
 				break;
 			}
 			if(!deque.isEmpty()){
-				int a = deque.pollFirst();
+				deque.poll();
 			}
 			if(deque.size() == 1) {
 				break;
 			}
 			int b = -1;
 			if(!deque.isEmpty()){
-				b = deque.pollFirst();
+				b = deque.poll();
 			}
-			deque.addLast(b);
+			deque.offer(b);
 		}
-		System.out.println(deque.getFirst());
+		System.out.println(deque.peek());
 	}
 }
