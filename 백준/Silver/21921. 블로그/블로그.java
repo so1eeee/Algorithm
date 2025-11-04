@@ -10,31 +10,30 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int X = Integer.parseInt(st.nextToken());
 		int[] arr = new int[N];
-		int[] preSum = new int[N];
-		StringTokenizer st2 = new StringTokenizer(br.readLine());
+		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			arr[i] = Integer.parseInt(st2.nextToken());
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
-		preSum[0] = arr[0];
-		for (int i = 1; i < N; i++) {
-			preSum[i] = preSum[i - 1] + arr[i];
+		int sum = 0;
+		for (int i = 0; i < X; i++) {
+			sum += arr[i];
 		}
-		int max = preSum[X - 1];
+		int max = sum;
 		int cnt = 1;
 		for (int i = X; i < N; i++) {
-			int cur = preSum[i] - preSum[i - X];
-			if (cur > max) {
-				max = cur;
+			sum = sum + arr[i] - arr[i - X];
+			if (sum > max) {
+				max = sum;
 				cnt = 1;
-			} else if (cur == max) {
+			} else if (sum == max) {
 				cnt++;
 			}
 		}
-		if (max == 0){
+		if (max == 0) {
 			System.out.println("SAD");
-			return;
+		} else {
+			System.out.println(max);
+			System.out.println(cnt);
 		}
-		System.out.println(max);
-		System.out.println(cnt);
 	}
 }
