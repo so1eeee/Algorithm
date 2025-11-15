@@ -49,9 +49,6 @@ public class Main {
 			if (!visited[neighbor]) {
 				dfs(neighbor, depth + 1);
 			}
-			if (found){
-				return;
-			}
 		}
 		visited[node] = false;
 	}
