@@ -13,12 +13,12 @@ public class Main {
 	static int[] dc = {0, 0, -1, 1};
 
 	static class Point {
-		int r, c, dist, broken;
-		public Point(int r, int c, int dist, int broken) {
+		int r, c, dist, cnt;
+		public Point(int r, int c, int dist, int cnt) {
 			this.r = r;
 			this.c = c;
 			this.dist = dist;
-			this.broken = broken;
+			this.cnt = cnt;
 		}
 	}
 
@@ -35,13 +35,13 @@ public class Main {
 				int nr = cur.r + dr[i];
 				int nc = cur.c + dc[i];
 				if (nr >= 0 && nr < N && nc >= 0 && nc < M) {
-					if (map[nr][nc] == 0 && !visited[nr][nc][cur.broken]) {
-						visited[nr][nc][cur.broken] = true;
-						queue.add(new Point(nr, nc, cur.dist + 1, cur.broken));
+					if (map[nr][nc] == 0 && !visited[nr][nc][cur.cnt]) {
+						visited[nr][nc][cur.cnt] = true;
+						queue.add(new Point(nr, nc, cur.dist + 1, cur.cnt));
 					}
-					else if (map[nr][nc] == 1 && cur.broken == 0 && !visited[nr][nc][1]) {
+					else if (map[nr][nc] == 1 && cur.cnt < 1 && !visited[nr][nc][1]) {
 						visited[nr][nc][1] = true;
-						queue.add(new Point(nr, nc, cur.dist + 1, 1));
+						queue.add(new Point(nr, nc, cur.dist + 1, cur.cnt + 1));
 					}
 				}
 			}
