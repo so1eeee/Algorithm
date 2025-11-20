@@ -11,7 +11,7 @@ public class Main {
 		int low = 0;
 		int high = A.length - 1;
 		while (low <= high) {
-			int mid = (low + high) / 2;
+			int mid = low + (high - low) / 2;
 			if(A[mid] == target) {
 				return true;
 			} else if (A[mid] < target) {
