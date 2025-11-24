@@ -21,6 +21,11 @@ public class Main {
 		Arrays.fill(time, -1);
 		time[N] = 0;
 		cnt[N] = 1;
+		if(N >= K){
+			System.out.println(N - K);
+			System.out.println(1);
+			return;
+		}
 		bfs();
 		System.out.println(time[K]);
 		System.out.println(cnt[K]);
@@ -31,6 +36,9 @@ public class Main {
 		queue.offer(N);
 		while (!queue.isEmpty()) {
 			int cur = queue.poll();
+			if(cur == K) {
+				return;
+			}
 			int[] next = {cur - 1, cur + 1, cur * 2};
 			for (int nextPos : next) {
 				if (nextPos >= 0 && nextPos < 100001) {
